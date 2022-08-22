@@ -1,0 +1,18 @@
+﻿@model IEnumerable<FoodCatalog.Models.Categorys>
+@{ ViewBag.Title = "Справочник категорий"; }
+<table class="table">
+    <tr><td>№</td><td>Категория</td></tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Id</td>
+    <td>@item.CategoryName</td>
+    <td>
+        <a asp-action="EditCategory" asp-controller="Home" asp-route-id="@item.Id">Изменить</a> |
+        <a asp-action="DeleteCategory" asp-controller="Home" asp-route-id="@item.Id">Удалить</a>
+    </td>
+</tr>
+}
+</table>
+
+<a asp-action="CreateCategory">Добавить</a>

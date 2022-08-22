@@ -1,0 +1,45 @@
+﻿@model FoodCatalog.Models.SelectForEditting
+@{ ViewBag.Title = "Редактирование продукта"; }
+
+
+<form asp-action="EditProduct" asp-controller="home">
+    <label asp-for="Categor">Категория:  </label>
+    <select asp-for="Product.CategorysId" asp-items="Model.Categor" class="form-control"></select>
+
+    <div class="overflow-hidden">
+        <input type="hidden" asp-for="Product.Id" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.ProductName" class="control-label">Продукт:</label>
+        <input type="text" asp-for="Product.ProductName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Description" class="control-label">Описание:</label>
+        <input type="text" asp-for="Product.Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Price" class="control-label">Цена:</label>
+        <input type="text" asp-for="Product.Price" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Product.Note" class="control-label">Примечание:</label>
+        <input type="text" asp-for="Product.Note" class="form-control" />
+    </div>
+
+    @if (User.IsInRole("admin") || User.IsInRole("advaced"))
+    {
+<div class="form-group">
+    <label asp-for="Product.SpecialNote" class="control-label">Примечание специальное:</label>
+    <input type="text" asp-for="Product.SpecialNote" class="form-control" />
+</div>
+    }
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-outline-dark" />
+                </div>
+
+                            </form>

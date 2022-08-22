@@ -1,0 +1,49 @@
+﻿@model FoodCatalog.Models.SearchM
+@{ ViewBag.Title = "Справочник продуктов"; }
+
+@if (User.IsInRole("admin"))
+{
+<a asp-action="ViewCategoriesList">Перейти к справочнику категорий</a>
+}
+
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="control-label">Продукт:  </label>
+        <input name="prodname" class=" form-control" />
+        <label asp-for="Categor">Категория:  </label>
+        @Html.DropDownList("CategorysId", Model.Categor, "Выберите категорию")
+        <input type="submit" value="Применить" class="btn btn-outline-dark" />
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>Наименование продукта</td>
+            <td>Категория</td>
+            <td>Описание</td>
+            <td>Стоимость в рублях</td>
+            <td>Примечание общее</td>
+            @if (User.IsInRole("admin") || User.IsInRole("advaced"))
+            {
+<td>Примечание специальное</td>            }
+        </tr>
+        @foreach (var item in Model.Product)
+        {
+<tr>
+    <td>@item.ProductName</td>
+    <td>@item.Categorys.CategoryName</td>
+    <td>@item.Description</td>
+    <td>@item.Price</td>
+    <td>@item.Note</td>
+    @if (User.IsInRole("admin") || User.IsInRole("advaced"))
+    {
+<td>@item.SpecialNote</td>}
+
+    <td>
+        <a asp-action="EditProduct" asp-controller="Home" asp-route-id="@item.Id">Изменить</a> |
+        <a asp-action="DeleteProduct" asp-controller="Home" asp-route-id="@item.Id">Удалить</a>
+    </td>
+</tr>}
+    </table>
+</form>
+
+<a asp-action="AddProduct">Добавить</a>
