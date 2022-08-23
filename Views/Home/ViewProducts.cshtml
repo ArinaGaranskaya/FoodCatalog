@@ -11,7 +11,7 @@
         <label class="control-label">Продукт:  </label>
         <input name="prodname" class=" form-control" />
         <label asp-for="Categor">Категория:  </label>
-        @Html.DropDownList("CategorysId", Model.Categor, "Выберите категорию")
+           @Html.DropDownList("categoryid", Model.Categor, "Выберите категорию")
         <input type="submit" value="Применить" class="btn btn-outline-dark" />
     </div>
 
